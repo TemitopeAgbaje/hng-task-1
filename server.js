@@ -1,31 +1,20 @@
-const http = require("http");
+const express = require("express");
 
-const PORT = 4000;
-const HOSTNAME = "localhost";
+const PORT = process.env.PORT || 4000;
 
-const requestListener = (req, res) => {
-  res.setHeader("Content-Type", "application/json");
+const app = express();
 
-  if (req.url === "/" && req.method === "GET") {
-    getDetails(req, res);
-  }
-};
 
-const getDetails = (req, res) => {
-  res.writeHead(200); // Status code 200 = OK
-  res.end(
-    JSON.stringify({
-      slackUsername: "Temitope Agbaje",
-      backend: true,
-      age: 23,
-      bio: "I am a very friendly and cheerful person",
-    })
-  );
+app.get("/", async (req, res, next) => {
+  return res.status(200).send({
+    slackUsername: "Temitope Agbaje",
+    backend: true,
+    age: 23,
+    bio: "I am a very friendly and cheerful person",
+  });
+});
 
-};
 
-//Create the server
-const server = http.createServer(requestListener);
-server.listen(PORT, HOSTNAME, () => {
-  console.log(`Server running at http://localhost:4000`);
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
 });
