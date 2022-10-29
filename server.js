@@ -27,5 +27,5 @@ const getDetails = (req, res) => {
 //Create the server
 const server = http.createServer(requestListener);
 server.listen(PORT, HOSTNAME, () => {
-  console.log(`Server running at http://${HOSTNAME}:${PORT} `);
+  console.log(`Server running at http://localhost:4000`);
 });
